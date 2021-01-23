@@ -2,7 +2,7 @@
 const express = require("express");
 // const apiRoutes = require("./routes/apiRoutes")
 // const htmlRoutes = require("./routes/htmlRoutes")
-// var path = require("path");
+const path = require("path");
 
 // Sets up the Express App
 const app = express();
@@ -19,13 +19,29 @@ app.use(express.static("public"));
 // app.use("/", htmlRoutes);
 
 
+
+
+// The following HTML routes should be created:
+
+// GET /notes - Should return the notes.html file.
+
+// GET * - Should return the index.html file
+
+
+
+
+
 // Routes
 // =============================================================
 
 // Basic route that sends the user first to the AJAX Page
-// app.get("/", function(req, res) {
-//   res.sendFile(path.join(__dirname, "view.html"));
-// });
+//Why does index doesn't need a search in public folder
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+app.get("/notes", function(req, res) {
+  res.sendFile(path.join(__dirname, "/public/notes.html"));
+});
 
 // app.get("/add", function(req, res) {
 //   res.sendFile(path.join(__dirname, "add.html"));
@@ -67,6 +83,8 @@ app.use(express.static("public"));
 
 //   res.json(newCharacter);
 // });
+
+
 
 // Starts the server to begin listening
 // =============================================================
