@@ -1,13 +1,13 @@
 // Dependencies
 const express = require("express");
-const apiRoutes = require("./routes/apiRoutes")
-const htmlRoutes = require("./routes/htmlRoutes")
+// const apiRoutes = require("./routes/apiRoutes")
+// const htmlRoutes = require("./routes/htmlRoutes")
 // var path = require("path");
 
 // Sets up the Express App
 const app = express();
 //process.env - property returns an object containing the user environment.
-const PORT = process.env.Port || 3000;
+const PORT =  3000; //process.env.PORT ||
 
 // Sets up the Express app to handle data parsing
 app.use(express.json());
@@ -15,8 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 
 //Static files and resources
 app.use(express.static("public"));
-app.use("/api", apiRoutes);
-app.use("/", htmlRoutes);
+// app.use("/api", apiRoutes);
+// app.use("/", htmlRoutes);
 
 
 // Routes
