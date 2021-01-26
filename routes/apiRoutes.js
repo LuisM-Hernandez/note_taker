@@ -23,9 +23,7 @@ module.exports = function (app){
     fs.readFile('./db/db.json', "utf-8", (err, data) => {
       notes = JSON.parse(data);
      if (err) throw err;
-    //  console.log(notes);
-    //  console.log(newNote);
-     
+   
      notes.push(newNote);
      writeNote(notes);
      res.send();
@@ -35,7 +33,7 @@ module.exports = function (app){
 
   app.delete('/api/notes/:id', function (req, res) {
    
-    //Tragets the id
+    //Targets the id
     var chosen = req.params.id;
     console.log(chosen);
 
@@ -43,16 +41,9 @@ module.exports = function (app){
      if (err) throw err;
      notes = JSON.parse(data);
 
-      // const result = notes.filter(notes => chosen === notes);
-      // console.log(result);
-      // for (var i=0; i<notes.length; i++) {
-      // }
-      // console.log(notes[0].id);
-      var notesIndex = notes.findIndex(i => i.id == chosen);
+      var notesIndex = notes.filter(notes => notes.id == chosen);
       console.log(notesIndex);
-      notes.splice(notesIndex, 1);
-      writeNote(notes)
-
+      // writeNote(notes)
 
    });
 
@@ -60,6 +51,4 @@ module.exports = function (app){
 
   })
 
-
 }
-
