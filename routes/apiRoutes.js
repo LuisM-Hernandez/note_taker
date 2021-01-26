@@ -16,14 +16,13 @@ module.exports = function (app){
   });
   
   app.post("/api/notes", function(req, res) {
-    //This variable will be used to
     var newNote = req.body
-    newNote.id = Math.floor(Math.random() * 1000);
+    // newNote.id = Math.floor(Math.random() * 1000);
 
     fs.readFile('./db/db.json', "utf-8", (err, data) => {
       notes = JSON.parse(data);
      if (err) throw err;
-   
+    
      notes.push(newNote);
      writeNote(notes);
      res.send();
@@ -33,7 +32,6 @@ module.exports = function (app){
 
   app.delete('/api/notes/:id', function (req, res) {
    
-    //Targets the id
     var chosen = req.params.id;
     console.log(chosen);
 
@@ -41,9 +39,10 @@ module.exports = function (app){
      if (err) throw err;
      notes = JSON.parse(data);
 
-      var notesIndex = notes.filter(notes => notes.id == chosen);
+      var notesIndex = notes.findIndex(i => i.id == chosen);
       console.log(notesIndex);
-      // writeNote(notes)
+      notes.splice(notesIndex, 1);
+      writeNote(notes)
 
    });
 
@@ -51,4 +50,6 @@ module.exports = function (app){
 
   })
 
+
 }
+
