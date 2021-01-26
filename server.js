@@ -18,7 +18,7 @@ app.use(express.static("public"));
 require("./routes/htmlRoutes")(app)
 require("./routes/apiRoutes")(app)
 
-
+//The listening PORT of our chosen localhost
 app.listen(PORT, function () {
   console.log("App listening on PORT " + PORT);
 });

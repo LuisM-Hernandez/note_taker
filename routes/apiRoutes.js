@@ -11,6 +11,7 @@ function writeNote(newNote) {
 
 module.exports = function (app){
   
+  //apiRoutes
   app.get("/api/notes", function(req, res) {
     return res.sendFile(path.join(__dirname, "../db/db.json"));
   });
@@ -19,10 +20,11 @@ module.exports = function (app){
     var newNote = req.body
     // newNote.id = Math.floor(Math.random() * 1000);
 
+    //Read the notes empty array and parse the data.
     fs.readFile('./db/db.json', "utf-8", (err, data) => {
       notes = JSON.parse(data);
      if (err) throw err;
-    
+    //Push the data of notes to newNote and run the write function to notes
      notes.push(newNote);
      writeNote(notes);
      res.send();
@@ -30,10 +32,11 @@ module.exports = function (app){
    });
   });
 
+  
   app.delete('/api/notes/:id', function (req, res) {
-   
+   //chosen variable adds an id to each newNote
     var chosen = req.params.id;
-    console.log(chosen);
+    // console.log(chosen);
 
     fs.readFile('./db/db.json', "utf-8", (err, data) => {
      if (err) throw err;
@@ -52,4 +55,3 @@ module.exports = function (app){
 
 
 }
-
