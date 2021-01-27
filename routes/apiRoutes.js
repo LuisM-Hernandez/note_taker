@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require ("fs");
 
+var chosen = 0;
 var notes = [];
 // Function will be called to write newnotes to the db.json
 function writeNote(newNote) {
@@ -18,7 +19,7 @@ module.exports = function (app){
   
   app.post("/api/notes", function(req, res) {
     var newNote = req.body
-    // newNote.id = Math.floor(Math.random() * 1000);
+    newNote.id = Math.floor(Math.random() * 1000);
 
     //Read the notes empty array and parse the data.
     fs.readFile('./db/db.json', "utf-8", (err, data) => {
@@ -35,8 +36,8 @@ module.exports = function (app){
   
   app.delete('/api/notes/:id', function (req, res) {
    //chosen variable adds an id to each newNote
-    var chosen = req.params.id;
-    // console.log(chosen);
+     chosen = req.params.id;
+     console.log(chosen);
 
     fs.readFile('./db/db.json', "utf-8", (err, data) => {
      if (err) throw err;
@@ -45,13 +46,11 @@ module.exports = function (app){
       var notesIndex = notes.findIndex(i => i.id == chosen);
       console.log(notesIndex);
       notes.splice(notesIndex, 1);
-      writeNote(notes)
+      writeNote(notes);
 
    });
 
     return res.send("No character found");
 
   })
-
-
 }
